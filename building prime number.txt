@@ -1,0 +1,96 @@
+Use Complete Factor Number building Prime. Found Rule of Primes!
+
+The definition of Complete Factor Number: it is the product of continue primes from the lowest prime.
+Complete Factor Number List: 1, 2, 6, 30, 210, 2310, 30030......(as 1x1=1, 1x2=2,1x2x3=6, 1x2x3x5=30,1x2x3x5x7=210...)
+
+Examples of building Prime, from 1:
+
+Complete Factor Number 1
+Prime 2=1+1
+
+
+Complete Factor Number 2=1x2
+3=2+1
+5=2x2+1
+
+
+Complete Factor Number 6=2x3, 5 is not 6¡¯s factor and 5 < 6£¬5 x 5 is between 6 and 30
+
+7=6+1
+11=6+5
+13=2x6+1
+17=2x6+5
+19=3x6+1
+23=3x6+5
+25=4x6+1=5x5 Remove
+29=4x6+5
+
+
+Complete Factor Number 30=2x3x5£¬Prime 7 to 29 is not 30¡¯s factor and less than 30
+31=30+1
+37=30+7
+41=30+11
+43=30+13
+...
+53=30+23
+59=30+29
+
+61=30x2+1
+67=30x2+7
+...
+77=30x2+17=7x11 remove
+...
+89=30x2+29
+
+...
+
+181=30x6+1
+...
+191=30x6+11
+...
+209=30x6+29=11x19
+
+
+Complete Factor Number 210=2x3x5x7, 
+List 11£¬13...31..77£¨Composite)..209£¨Composite) has no sharing factor with 210 and less than 210
+211=210+1
+...
+2101=210x10+1=191x11 
+...
+2309=210x10+209
+
+
+
+
+Description:
+
+m is Complete Factor Number. m=1 x.....x p
+n is the next Complete Factor Number after m. n=m x q = 1 x...x p x q
+[q..m] is the set of all products of primes between q and m. The members of [q..m] is unlimited. If a, b, c are in this set, a x a x a..., bxb...., axaxb, axbxcxc¡­will also in this set
+
+
+Rule 1: This rule describes all prime numbers between m and n can be built using this approach
+If b is prime, m < b < n, b can be describe as b = k x m + a
+1 <=k < q, a < m, a is 1 or belong to [q..m]
+
+Rule 2: This rule describe using this approach can build all exact prime numbers between m and n, no more or less
+For all b that m<b<n and b = k x m + a (1 <=k < q, a < m, a is 1 or belong to [q..m])
+If b is not a prime number and c is a prime factor of b, then q <=c < m (It is equal as b belong to [q..m] and m < b <n)
+
+The Prove of Rule 1:
+ if a is belong to [q..m], if a is Prime then a is a factor of m. if a is not a Prime then one of a¡¯s factor is a factor of m, then b is not a prime number. It is conflict with ¡°b is prime¡±.
+
+The Prove of Rule 2: 
+k x m and a don¡¯t have a common factor. If  k x m + a is not prime and if c is one of prime factor of b and if c < q, then c is a factor of m, then c is a factor of a. It is conflict with  ¡°a is 1 or belong to [q..m]¡±
+
+The way of building Primes between m and n:
+
+First, find a set of [q..m] between q and m. as a
+Then, fine a set of [q..m] between m and n, as a set c to be removed from b
+Then, use b = k x m + a to build all of b
+Then remove c from b
+You will get a set of primes between [m¡­n]
+
+About me:I am Grant. I am a developer, architect in Toronto. I am good at .net, python, SQL, BI, Data warehouse and web. My email is honggangz@gmail.com . Feel free to contact me.
+
+Copyright reserved. Welcome to share. But please keep where the article is come from.
