@@ -1,10 +1,12 @@
-Use Prefect Composite Numbers building Prime. Found Rule of Primes!
+The Law of Prime Numbers Distribution based on Prefect Composite Numbers
 
 The definition of Prefect Composite Number: it is the product of continue primes from the lowest prime. Although the list contains 1, 2 I still call it as Prefect Composite Numbers, since they look like most profect Composite numbers.
 
 Prefect Composite Number List: 1, 2, 6, 30, 210, 2310, 30030......(as 1x1=1, 1x2=2,1x2x3=6, 1x2x3x5=30,1x2x3x5x7=210...)
 
-Examples of building Prime, from 1:
+First primes can be build by smaller Prefect Composite Number and primes.
+
+See examples of building Primes from 1, the prove is coming after:
 
 Prefect Composite Number 1
 Prime 2=1+1
