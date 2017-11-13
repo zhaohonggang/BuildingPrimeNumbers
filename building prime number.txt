@@ -1,21 +1,21 @@
-Use Complete Factor Number building Prime. Found Rule of Primes!
+Use Prefect Composite Numbers building Prime. Found Rule of Primes!
 
-The definition of Complete Factor Number: it is the product of continue primes from the lowest prime.I also call it as Complete Composite numbers, since they look like profect Composite numbers.
+The definition of Prefect Composite Number: it is the product of continue primes from the lowest prime. Although the list contains 1, 2 I still call it as Prefect Composite Numbers, since they look like most profect Composite numbers.
 
-Complete Factor Number List: 1, 2, 6, 30, 210, 2310, 30030......(as 1x1=1, 1x2=2,1x2x3=6, 1x2x3x5=30,1x2x3x5x7=210...)
+Prefect Composite Number List: 1, 2, 6, 30, 210, 2310, 30030......(as 1x1=1, 1x2=2,1x2x3=6, 1x2x3x5=30,1x2x3x5x7=210...)
 
 Examples of building Prime, from 1:
 
-Complete Factor Number 1
+Prefect Composite Number 1
 Prime 2=1+1
 
 
-Complete Factor Number 2=1x2
+Prefect Composite Number 2=1x2
 3=2+1
 5=2x2+1
 
 
-Complete Factor Number 6=2x3, 5 is not 6’s factor and 5 < 6，5 x 5 is between 6 and 30
+Prefect Composite Number 6=2x3, 5 is not 6’s factor and 5 < 6，5 x 5 is between 6 and 30
 
 7=6+1
 11=6+5
@@ -27,7 +27,7 @@ Complete Factor Number 6=2x3, 5 is not 6’s factor and 5 < 6，5 x 5 is between
 29=4x6+5
 
 
-Complete Factor Number 30=2x3x5，Prime 7 to 29 is not 30’s factor and less than 30
+Prefect Composite Number 30=2x3x5，Prime 7 to 29 is not 30’s factor and less than 30
 31=30+1
 37=30+7
 41=30+11
@@ -52,7 +52,7 @@ Complete Factor Number 30=2x3x5，Prime 7 to 29 is not 30’s factor and less th
 209=30x6+29=11x19
 
 
-Complete Factor Number 210=2x3x5x7, 
+Prefect Composite Number 210=2x3x5x7, 
 List 11，13...31..77（Composite)..209（Composite) has no sharing factor with 210 and less than 210
 211=210+1
 ...
@@ -61,21 +61,19 @@ List 11，13...31..77（Composite)..209（Composite) has no sharing factor with 
 2309=210x10+209
 
 
-
-
 Description:
 
-m is Complete Factor Number. m=1 x.....x p
-n is the next Complete Factor Number after m. n=m x q = 1 x...x p x q
+m is Prefect Composite Number. m=1 x.....x p
+n is the next Prefect Composite Number after m. n=m x q = 1 x...x p x q
 [q..m] is the set of all primes and products of primes between q and m. The members of [q..m] is unlimited. If a, b, c are in this set, a x a x a..., bxb...., axaxb, axbxcxc…will also in this set
 
 
 theorem 1: This theorem describes all prime numbers between m and n can be built using this approach
-If b is prime, m < b < n, b can be describe as b = k x m + a
+If b is prime, m < b < n, b can be describe as b = k * m + a
 1 <=k < q, a < m, a is 1 or belong to [q..m]
 
 theorem 2: This theorem describe using this approach can build all exact prime numbers between m and n, no more or less
-For all b that m<b<n and b = k x m + a (1 <=k < q, a < m, a is 1 or belong to [q..m])
+For all b that m<b<n and b = k * m + a (1 <=k < q, a < m, a is 1 or belong to [q..m])
 If b is not a prime number and c is a prime factor of b, then q <=c < m (It is equal as b belong to [q..m] and m < b <n)
 
 The Prove of theorem 1:
@@ -88,19 +86,37 @@ The way of building Primes between m and n:
 
 First, find a set of [q..m] between q and m. as a
 Then, fine a set of [q..m] between m and n, as a set c to be removed from b
-Then, use b = k x m + a to build all of b
+Then, use b = k * m + a to build all of b
 Then remove c from b
 You will get a set of primes between [m…n]
 
-Now describ how to based on Complete Factor Number(m) to describe the law of Prime Numbers Distribution.
+Now describ how to based on Prefect Composite Number(m) to describe the law of Prime Numbers Distribution.
 
 We can prove, if a belong to [q..m], a < m then m - a is also belong to [q..m]
 
 So (a, m-a) is a pair on the side of m/2. Therefore, the numbers, which in [q..m] which are bigger than 0 and smaller than m, are appear by pairs. Those pairs include (1,m-1) and other pairs are inside the area of q <= (x,y) <= m - q, I call it [q..m-q]. So I call the full set between 0 and m as {1,[q..m-q],m-1}. 
 
-Therefore, {1,[q..m-q],m-1} is the sub set of [q..m] between 0 and m. This set include all prime numbers who are smaller than m exclude m's prime factors. This set may also include some Composite numbers which not sharing prime factors with m. This set is the feeds of building the prime numbers between m to n.
+Therefore, {1,[q..m-q],m-1} is the sub set of [q..m] between 0 and m. This set include all prime numbers who are smaller than m exclude m's prime factors. This set may also include some Composite numbers which not sharing prime factors with m. This set is the feeds of building the prime numbers between m to n in the above building approach.
+
+See this way, m divied numbers into unlimited equal spaces, which are {1,m}, {m+1, 2m},....{km+1, (k+1)m}.
+
+based on the building approach, all prime numbers in the spaces afterward are built from the numbers set in {1, m}, which is {1,[q..m-q],m-1}, by the formula as K*m + a. From each m's spaces point of view, the distribution law of these numbers repeating as the same pattern as the pairs on both sides of K*m + m/2. We can describ it as:
+
+The set k * m + {1,[q..m-q],m-1}， k = 0,1,2..n-1 include all prime numbers which smaller than n * m except the prime factors of m. When m is increasing, The set union with the set of m's prime factors will more and more close to the set of actual primes.
+
+Below is the examples from 1:
+
+As m = 1, the spaces of Ones are k + 1,  k = 0,1,2.... which include all numbers above 0, of course it contains all primes.
+
+As m = 2, the spaces of Twos are k * 2 + 1, k = 0,1,2.... which is all odd numbers, it contains all prime numbers except 2
+
+As m = 6, the spaces of Sixes are k * 6 + {1,5}, k = 0,1,2.... which is k * 6 + 1 or k * 6 + 5, it contains all prime numbers except 2,3. Examples as 1 = 0 * 6 + 1, 5 = 0 * 6 + 5, 7 = 1 * 6 + 1, 11 = 1 * 6 + 5, 13 = 2 * 6 + 1, 17 = 2 * 6 + 5, 19 = 3 * 6 + 1, 23 = 3 * 6 + 5, 25 = 4 * 6 + 1(Composite), 29 = 4 * 6 + 5, 31 = 5 * 6 + 1...
+(1,5), (7,11), (13, 17) , (19, 23), (25, 29) , (31, 35) are pairs in (1, 6), (7,12),(13, 18),(19, 24),(25,30),(31,36), since (1+5)/2 = 3, (7+11)/2 = 9, (13 + 17)/2 = 15, (19 + 23)/2 = 21, (31 + 35)/2 = 33  Inside them 25, 35 is composite
+
+As m = 30, the spaces of Thirties are k * 30 + {1,7,11,13,17,19,23,29}, k = 0,1,2.... It contains all prime numbers except 2,3,5. Examples as 31 = 30 + 1, 37 = 30 + 7..., 59 = 30 + 29, 60 = 2 * 30 + 1, 67 = 2 * 30 + 7...89 = 2 * 30 + 29...
+(1,29),(7, 23), (11,19), (13,17) are pairs in {1, 30}. (31, 59) (37,53)... are pairs in {31,60} since (31 + 59) / 2 = 45, (37 + 53) / 2 = 45....
 
 
-About me:I am Grant. I am a developer, architect in Toronto. I am good at .net, python, SQL, BI, Data warehouse and web. My email is honggangz@gmail.com . Feel free to contact me.
+About me:I am Grant Zhao. I am a developer, architect in Toronto. I am good at .net, python, SQL, BI, Data warehouse and web. My email is honggangz@gmail.com . Feel free to contact me.
 
 Copyright reserved. Welcome to share. But please keep where the article is come from.
