@@ -119,6 +119,6 @@ As m = 30, the spaces of Thirties are k * 30 + {1,7,11,13,17,19,23,29}, k = 0,1,
 (1,29),(7, 23), (11,19), (13,17) are pairs in {1, 30}. (31, 59) (37,53)... are pairs in {31,60} since (31 + 59) / 2 = 45, (37 + 53) / 2 = 45....
 
 
-About me:I am Grant Zhao. I am a developer, architect in Toronto. I am good at .net, python, SQL, BI, Data warehouse and web. My email is honggangz@gmail.com . Feel free to contact me.
+About me:I am a developer, architect in Toronto. I am good at .net, python, SQL, BI, Data warehouse and web. My email is honggangz@gmail.com . Feel free to contact me.
 
 Copyright reserved. Welcome to share. But please keep where the article is come from.
