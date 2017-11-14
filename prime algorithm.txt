@@ -45,7 +45,7 @@ SP(n) = {p(k)| C(n) <p(k) < C(n+1)}
 
 SP(n) = f(p(n)) exp {*p(k)| p(n)<k<C(n) and  C(n) <*p(k) < C(n+1)} = f(p(n)) exp e(n)
 
-e(n) is inside {*p(k) | *p(k) < C(min(pk)) }
+e(n) is inside {*p(k) | *p(k) < C(min(pk))， p(n+1) <= p(k) <  C(n) }
 
 The way of calculate {p(k)| C(n) <p(k) < C(n+1)} is:
 
@@ -53,7 +53,7 @@ s(p(n)) = {C(n-1)*j + s(p(n-1))| 0=<j<p(n) exp {p(n) * k|k = {N}}
 
 f(p(n)) = {C(n) * k + s(p(n))|0<=k < p(n+1)} 
 
-e(n) in {*p(k) | *p(k) < C(min(p(k)), n+1<k, p(k) <  C(n) }
+e(n) in {*p(k) | *p(k) < C(min(p(k)), n+1<k, p(n+1) <= p(k) <  C(n) }
 
 {p(k)| C(n) <p(k) < C(n+1)} = f(p(n)) exp e(n)
 
