@@ -57,6 +57,50 @@ e(n) in {*p(k) | *p(k) < C(min(p(k)), n+1<k, p(n+1) <= p(k) <  C(n) }
 
 {p(k)| C(n) <p(k) < C(n+1)} = f(p(n)) exp e(n)
 
+def primepcn(x): # x is the level of profect composite number 1|{1}, 2|{2}, 3|{6}, 4|{30}
+    all = [2,3,5]
+    s_p = [1]
+    c_p = 2
+    c = 6
+    p = 3
+    p_n = 5
+
+    for n in xrange(3,x+1):
+        s = []
+        #len_p = len(all)
+        #s(p(n)) = {C(n-1)*j + s(p(n-1))| 0=<j<p(n) exp {p(n) * k|k = {N}}
+        for j in xrange(0,p):
+            for i in s_p:
+                t = c_p * j + i
+                if (t % p) > 0:
+                    s.append(t)
+
+
+        #f(p(n)) = {C(n) * k + s(p(n)) | 0 <= k < p(n + 1)}
+        #SP(n) = f(p(n)) exp {*p(k)| p(n)<k<C(n) and  C(n) <*p(k) < C(n+1)} = f(p(n)) exp e(n)
+        for k in xrange(1, p_n):
+            for i in s:
+                t = c * k + i
+                found = False
+                for j in xrange(n - 1,len(all)):
+                    if all[j] > c:
+                        break;
+                    if t % all[j] == 0:
+                        found = True
+                        break
+                if not found:
+                    all.append(t)
+                    print 'pcn:{}\n'.format(t)
+
+
+        s_p = s
+        p = all[n-1]
+        c_p = c
+        c = c * p
+        p_n = all[n]
+
+    return all
+
 About me:Grant Zhao. I am a developer, architect in Toronto. I am good at .net, python, SQL, BI, Data warehouse and web. My email is honggangz@gmail.com . Feel free to contact me.
 
 Copyright of this algorithm and this article is reserved to Grant Zhao.
