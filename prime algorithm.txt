@@ -1,8 +1,10 @@
 Published in Github on Nov 14, 2017 6:00AM
 
-C(n) = *(p(i))|1<=i<=p(n) we call it profect composite number, It has deep relation ship with primes. Using it can create a formula to calculate primes.
+P = {p(n)|n>=1,p(n) is the n-th prime number}
 
-The following is the approach of calculating {p(k)| C(n) <p(k) < C(n+1)} , proved by math already. Will write a program to verify. 
+C = {c(n)| c(n) = *(p(i))|1<=i<=p(n)} we call it profect composite number, It has deep relation ship with primes. Using it can create a formula to calculate primes.
+
+The following is the approach of calculating {p(k)| c(n) <p(k) < c(n+1)} , proved by math already. Will write a program to verify. 
 
 f(1) = {k + 1 | k = {N}} - {}
 
