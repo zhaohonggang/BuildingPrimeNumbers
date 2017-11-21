@@ -2,50 +2,52 @@ Published in Github on Nov 14, 2017 6:00AM
 
 P = {p(n)|n>=1,p(n) is the n-th prime number}
 
-C = {c(n)| c(n) = *(p(i))|1<=i<=p(n)} we call it profect composite number, It has deep relation ship with primes. Using it can create a formula to calculate primes.
+C(p(n)) = {c(p(n))| c(p(n)) = *(p(i))|1<=i<=p(n)} we call it profect composite number, It has deep relation ship with primes. Using it can create a formula to calculate primes.
 
-The following is the approach of calculating {p(k)| c(n) <p(k) < c(n+1)} , proved by math already. Will write a program to verify. 
+The following is the approach of calculating {p(k)| c(p(n)) <p(k) < c(p(n+1))}.
 
-f(1) = {k + 1 | k = {N}} - {}
+NC(p(n)) = {nc(p(n))| nc(p(n)) is coprime with c(p(n))}
 
-f(2) = f(1) - {2k|k = {N}} = {k + 1 | k = {N}} - {2k|k = {N}} = {2k + 1 | k = {N}}
+NC(1) = {k + 1 | k = {N}} - {}
 
-f(3) = f(2) - {3k|k = {N}} = {2k + 1 | k = {N}} - {3k|k = {N}} = {6k + 1,6k + 3,6k + 5| k = {N}} - {3k|k = {N}} = {6k + 1,6k + 5| k = {N}}
+NC(2) = NC(1) - {2k|k = {N}} = {k + 1 | k = {N}} - {2k|k = {N}} = {2k + 1 | k = {N}}
 
-f(5) = f(3) - {5k|k = {N}} = {6k + 1,6k + 5| k = {N}} - {5k|k = {N}} = {30k + 6m + 1, 30k + 6m + 5| k = {N},m = {x|0<=x<5}} - {5k|k = {N}}
+NC(3) = NC(2) - {3k|k = {N}} = {2k + 1 | k = {N}} - {3k|k = {N}} = {6k + 1,6k + 3,6k + 5| k = {N}} - {3k|k = {N}} = {6k + 1,6k + 5| k = {N}}
+
+NC(5) = NC(3) - {5k|k = {N}} = {6k + 1,6k + 5| k = {N}} - {5k|k = {N}} = {30k + 6m + 1, 30k + 6m + 5| k = {N},m = {x|0<=x<5}} - {5k|k = {N}}
  = {30k + 1, 30k + 5, 30k + 7, 30k + 11, 30k + 13, 30k + 17, 30k + 19 , 30k + 23, 30K + 25, 30k + 29 | k = {N}} - {5k|k = {N}}
  = {30k + 1, 30k + 7, 30k + 11, 30k + 13, 30k + 17, 30k + 19 , 30k + 23, 30k + 29 | k = {N}}
  
-f(p(n)) = f(p(n-1)) - {p(n) * k|k = {N}} 
-		= f(p(n-2)) - {p(n) * k|k = {N}},{p(n-1) * k|k = {N}} 
-		= f(p(n-m)) - {p(n) * k|k = {N}},{p(n-1) * k|k = {N}} ..., {p(n-m+1) * k|k = {N}} =  f(p(n-m)) - {p(j) * k|k = {N},n - m<j <= n}
-		= f(p(2)) - {p(j) * k|k = {N},2 <j <= n}
-		= f(p(1)) - {p(j) * k|k = {N},1 <j <= n}
+NC(p(n)) = NC(p(n-1)) - {p(n) * k|k = {N}} 
+		= NC(p(n-2)) - {p(n) * k|k = {N}},{p(n-1) * k|k = {N}} 
+		= NC(p(n-m)) - {p(n) * k|k = {N}},{p(n-1) * k|k = {N}} ..., {p(n-m+1) * k|k = {N}} =  NC(p(n-m)) - {p(j) * k|k = {N},n - m<j <= n}
+		= NC(p(2)) - {p(j) * k|k = {N},2 <j <= n}
+		= NC(p(1)) - {p(j) * k|k = {N},1 <j <= n}
 
-f(p(n)) = f(p(n-1)) - {p(n) * k|k = {N}} 
-		= {m * k + s(p(n-1))}|k = {N},m = *(p(i))|1<=i<=p(n-1)} - {p(n) * k|k = {N}} 
-		= {m*p(n)*k + m*j + s(p(n-1)) | k = {N},m = *(p(i))|1<=i<=p(n-1), 1<=j<p(n)} - {p(n) * k|k = {N}} 
-		= {m*p(n)*k + {m*j + s(p(n-1))} - {p(n) * k|k = {N}} | k = {N},m = *(p(i))|1<=i<=p(n-1), 0<=j<p(n)} 
+NC(p(n)) = NC(p(n-1)) - {p(n) * k|k = {N}} 
+  = {m * k + s(p(n-1))}|k = {N},m = *(p(i))|1<=i<=p(n-1)} - {p(n) * k|k = {N}} 
+	= {m*p(n)*k + m*j + s(p(n-1)) | k = {N},m = *(p(i))|1<=i<=p(n-1), 1<=j<p(n)} - {p(n) * k|k = {N}} 
+	= {m*p(n)*k + {m*j + s(p(n-1))} - {p(n) * k|k = {N}} | k = {N},m = *(p(i))|1<=i<=p(n-1), 0<=j<p(n)} 
 
-Therefore:
+Therefore, let:
 
+S(p(n)) = {m*j + s(p(n-1))|m = *(p(i))|1<=i<=p(n-1), 0<=j<p(n)} - {p(n) * k|k = {N}}
 
+S(p(n)) = {C(p(n-1))*j + S(p(n-1))|  0=<j<p(n)} - {p(n) * k|k = {N}} 
 
-s(p(n)) = {C(n-1)*j + s(p(n-1))|  0=<j<p(n) - {p(n) * k|k = {N}} 
+NC(p(n+1)) = {C(p(n)) * k + S(p(n))|k = {N}} 
 
-f(p(n)) = {C(n) * k + s(p(n))|k = {N}} 
+S(1) = {}
+S(2) = {1}
+S(3) =  {m*j + s(p(n-1))| m = 2, 0=<j<p(3) - {p(3) * k|k = {N}}  = {2*j + {1}| 0=<j<3 - {3 * k|k = {N}} = {1,3,5} - {3} = {1,5}
+NC(3) = {m * k + {1,5}|k = {N},m = 6} = {6k + {1,5}|k = {N}}
 
-s(1) = {}
-s(2) = {1}
-s(3) =  {m*j + s(p(n-1))| m = 2, 0=<j<p(3) - {p(3) * k|k = {N}}  = {2*j + {1}| 0=<j<3 - {3 * k|k = {N}} = {1,3,5} - {3} = {1,5}
-f(3) = {m * k + {1,5}|k = {N},m = 6} = {6k + {1,5}|k = {N}}
+S(5) = {6*j + {1,5}|0=<j<5} - {5 * k|k = {N}} 
+NC(5) = {30 * k + S(5)|k ={N}} 
 
-s(5) = {6*j + {1,5}|0=<j<5} - {5 * k|k = {N}} 
-f(5) = {30 * k + s(5)|k ={N}} 
+P(c(p(n)),c(p(n+1))) = {p(k)| c(p(n)) <p(k) < c(p(n+1))} 
 
-SP(n) = {p(k)| C(n) <p(k) < C(n+1)} 
-
-SP(n) = f(p(n)) - {*p(k)| p(n)<k<C(n) and  C(n) <*p(k) < C(n+1)} = f(p(n)) - e(n)
+P(c(p(n)),c(p(n+1))) = NC(p(n)) - {*p(k)| p(n)<k<c(p(n)), c(n) <*p(k) < c(n+1)} = NC(p(n)) - e(n)
 
 e(n) is inside {*p(k) | *p(k) < C(min(pk))， p(n+1) <= p(k) <  C(n) }
 
