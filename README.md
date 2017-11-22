@@ -4,7 +4,7 @@ This repository is about a new algorithm of generating prime numbers using Prefe
 
 This is a new way of calculating prime numbers, differenct than sieves and trial division.
 
-The speed is the same level of sieveOfAtkin http://en.wikipedia.org/wiki/Sieve_of_Atkin
+The speed is the same level as sieveOfAtkin(http://en.wikipedia.org/wiki/Sieve_of_Atkin)
 
 License: 
 free for non-commercial use. For commercial use, please contact me.
