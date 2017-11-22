@@ -8,6 +8,7 @@ This is a new way of calculating prime numbers, differenct than sieves and trial
 
 About me:A developer, architect in Toronto. My email is honggangz@gmail.com . 
 
-About license, not determined yet. Feel free to contact me.
+License: 
+free for non-commercial use. For commercial use, please contact me.
 
 Copyright reserved.

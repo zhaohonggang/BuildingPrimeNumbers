@@ -5,7 +5,7 @@ primepcn(5)
 a = primepcn(10)
 '''
 def primepcn(level):
-    # compare to v1, it is simpler and clearer describe the theory. Faster than v1 now
+    # compare to v1, it is simpler and clearer describe the theory
     """primepcn(level): return a list of all the prime numbers using Prefect Composite Number Theory founded by Honggang(Grant), Zhao from 2017-11-11"""
     # parameter is the level of profect composite number 1|{1}, 2|{2}, 3|{6}, 4|{30} 5|{210}, 6|2310,7:30030,8:510510,9:9699690,10:223092870
     # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>, from 2017-11-16
@@ -179,6 +179,57 @@ def array_product_2(array, min, max):
             if t > max:
                 break
 
+def array_product_all_n(array, min, max, n, mn):
+    # multiply sorted array numbers for any possible ways, yield results between min and max
+    # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>
+    if n == 0:
+        for a in array:
+            if a < min:
+                yield 1
+                return
+            if a > max:
+                yield 1
+                return
+            yield a
+    else:
+        max_t = max **(1.0/(mn+1))
+        for a in array:
+            if a > max_t:
+                yield 1
+                return
+            for b in array_product_all_n(array, min/a , max/a + 1, n - 1, mn):
+                yield a * b
+
+'''
+a = [7, 11, 13]
+b = list(array_product_all([7, 11, 13], 0, 200))
+from primepcn import array_product_all
+'''
+def array_product_all(array, min, max):
+    # multiply sorted array numbers for any possible ways, yield results between min and max
+    # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>
+    if len(array) == 0:
+        return
+
+    n = int(log(max, array[0])) - 1
+
+    mn = int(log(min, array[-1])) - 1
+
+    if mn < 0:
+        mn = 0
+
+    #yield (item for item in array_product_all_n(array, min, max, n) if min <item <max)
+    for a in array_product_all_n(array, min, max, n, mn):
+        if min <a <max:
+            yield a
+
+def array_product_all_and_one(array, min, max):
+    # multiply sorted array numbers for any possible ways, yield results between min and max
+    # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>
+    yield 1
+    for a in array_product_all(array, min, max):
+        yield a
+
 def array_product_all_nr_and_one(array, min, max):
     # multiply sorted array numbers for any possible ways, yield results between min and max
     # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>
@@ -241,6 +292,60 @@ def array_product_all_nr(array, min, max):
                 if l < max_level - 1 and t * array_0 < max:
                     stack.append(t)
 
+        l = l + 1
+        len_p = len_n
+
+
+
+'''
+a = [7, 11, 13]
+b = list(array_product_all_nr_no_index([5], 6, 30))
+from primepcn import array_product_all_nr_no_index
+'''
+def array_product_all_nr_no_index(array, min, max):
+    if len(array) == 0:
+        return
+
+    array_0 = array[0]
+
+    max_level = int(log(max, array[0])) - 1
+
+    min_level = int(log(min, array[-1])) - 1
+
+    if min_level < 0:
+        min_level = 0
+
+    t_max = max ** (1.0 / (min_level + 1))
+
+    #print "array:{},min:{},max:{},max_i:{}".format(array, min, max, max_i)
+    max_i = 0
+
+    while max_i < len(array) and array[max_i] < t_max:
+        max_i = max_i + 1
+
+    l = 0
+    stack = []
+    for i in array[0:max_i]:
+        if min < i:
+            yield i
+        if i * array_0 < max:
+            stack.append(i)
+    len_p = 0
+
+    while l <= max_level - 1:
+        #print stack
+        len_n = len(stack)
+        for a in stack[len_p:len_n]:
+            for i in array[0:max_i]:
+                if i > a:
+                    break
+                t = a * i
+                if t > max:
+                    break
+                if min < t:
+                    yield t
+                if l < max_level - 1 and t * array_0 < max:
+                    stack.append(t)
         l = l + 1
         len_p = len_n
 
