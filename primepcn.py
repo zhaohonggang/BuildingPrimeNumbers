@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Theory:
 
@@ -44,7 +45,7 @@ def getPrimes(level):
         print "min {} max {}".format(c, c_n)
 
         # Prepare Composite Number Except List will appear in the generation
-        e = [] if n-1 >= len(p_l) else list(set(getArrayProducts(p_l[n-1:], c, c_n)))
+        e = [] if n-1 >= len(p_l) else list(set(getArrayProducts_c_cn(p_l[n-1:], c, c_n)))
         print "Except List Prepared:{}"#.format(v)
 
         # Sort the Except list to be used in the next stage
@@ -89,6 +90,209 @@ def getPrimes(level):
 
     print 'count:{}\n'.format(len(p_l))
     return p_l
+
+def ToCN(msg):
+    dict = {
+        "from {} to {}" : "从 {} 到 {}",
+        "loop {} from {} to {}: total:{},primes:{},except:{},pair_count:{}":"循环 {} 从 {} 到 {}: 生成:{},素数:{},排除的合数:{},孪生素数对:{}",
+        "round from {} to {}: total:{},primes:{},except:{},pair_count:{}": "阶段 从 {} 到 {}: 生成:{},素数:{},排除的合数:{},孪生素数对:{}",
+        "count:{}":"总素数:{}"
+    }
+    dict = {}
+    if msg in dict:
+        return dict[msg]
+    else:
+        return msg
+
+
+'''
+from primepcn import getPrimesA
+a = getPrimesA(6)
+'''
+def getPrimesA(level):
+    """primepcnA(level): return a list of all the prime numbers with Analyze"""
+    # parameter is the level of profect composite number 1|{1}, 2|{2}, 3|{6}, 4|{30} 5|{210}, 6|2310,7:30030,8:510510,9:9699690,10:223092870
+    # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>, from 2017-11-16
+    # Code: https://github.com/zhaohonggang/BuildingPrimeNumbers/primepcn.py
+    # Info: https://github.com/zhaohonggang/BuildingPrimeNumbers/blob/master/building%20prime%20number.txt
+
+    c = 1 # current Prefect Composite Number
+    c_n = 2 # next Prefect Composite Number
+    p_l = [] # Prime number list
+    p_n = 2 # Next Prime number
+    l_p_l = 0 #length of p_l
+
+    for n in xrange(1,level):
+        print ToCN("from {} to {}").format(c, c_n - 1)
+        l_p_l = len(p_l)
+
+        # Prepare Composite Number Except List will appear in the generation
+        e = [] if n-1 >= len(p_l) else list(set(getArrayProducts_c_cn(p_l[n-1:], c, c_n)))
+        #print "Except List Prepared:{}"#.format(v)
+
+        # Sort the Except list to be used in the next stage
+        e.sort()
+        #print "Except List Sorted"
+
+        s = [1] + ([] if n-1 >= len(p_l) else list(set(getArrayProducts(p_l[n-1:], 2, c))))
+        #print "Seed List Prepared:{}"#.format(s)
+
+        # Sort the validation list to be used in the next stage
+        s.sort()
+        #print "Seed List Sorted"
+
+        e_i = 0 # Except List Index
+        # generate prime numbers based on the Prefect Composite Number and the Co-prime list
+        total_pair_count = 0
+        for k in xrange(1, p_n):
+            old_e_i = e_i
+            old_l_p_l = len(p_l)
+            pair_count = 0
+            for i in s:
+                t = c * k + i
+
+                # prime validation. If t is not in Except List, t is prime.
+                if len(e) > e_i:
+                    if t != e[e_i]:
+                        a = len(p_l)
+                        t_p = p_l[a-1] if a > 0 else 0
+                        p_l.append(t)
+                        if t - t_p == 2:
+                            pair_count = pair_count + 1
+
+                    else:
+                        e_i = e_i + 1
+                else:
+                    a = len(p_l)
+                    t_p = p_l[a - 1] if a > 0 else 0
+                    p_l.append(t)
+                    if t - t_p == 2:
+                        pair_count = pair_count + 1
+
+            round_primes = len(p_l) - old_l_p_l
+            round_except = e_i - old_e_i
+            round_total = round_primes + round_except
+            total_pair_count = total_pair_count + pair_count
+            print ToCN("loop {} from {} to {}: total:{},primes:{},except:{},pair_count:{}").format(k, c*k, c*(k+1) - 1, round_total, round_primes, round_except, pair_count)
+
+        #print "primes generated"
+
+
+        round_primes = len(p_l) - l_p_l
+        round_except = len(e)
+        round_total = round_primes + round_except
+
+        print ToCN("round from {} to {}: total:{},primes:{},except:{},pair_count:{}").format(c, c_n - 1, round_total, round_primes, round_except,
+                                                                             total_pair_count)
+        print "\n"
+        if n == 1:
+            p_n = 3
+        else:
+            p_n = p_l[n]
+
+        c = c_n
+        c_n = c * p_n
+
+
+
+        del e[:]
+        del s[:]
+
+
+    print ToCN('count:{}').format(len(p_l))
+    return p_l
+
+'''
+a = [7, 11, 13]
+b = list(getArrayProducts_c_cn([5], 6, 30))
+from primepcn import getArrayProducts
+'''
+def getArrayProducts_c_cn(array, min, max):
+    # this function optimize for NC{ c(p(n))..c(p(n+1)) } exception list calculation will not return all products if not used in this purpose
+    # multiply sorted array numbers any times including 0,1,2..n.., yield results between min and max
+    # Code by Honggang(Grant), Zhao, <honggangz@gmail.com>
+    if len(array) == 0:
+        return
+
+    array_0 = array[0]
+
+    max_1 = float(max) / array_0
+
+    max_level = int(log(max, array[0])) - 1
+
+    min_level = int(log(min, array[-1]))
+
+    t_max = max / (array_0 ** min_level)
+
+    max_i = 0
+
+    while max_i < len(array) and array[max_i] < t_max:
+        max_i = max_i + 1
+
+    #print "array:{},min:{},max:{},max_i:{},t_max:{}".format(array, min, max, max_i, t_max)
+
+    l = 0
+    stack = []
+
+    if min_level == 0:# push or yield
+        for i in xrange(0, max_i):
+            t = array[i]
+            if t > max:
+                break
+
+            if min < t:
+                yield t
+            else:
+                stack.append(t)
+    else:# push only
+        for i in xrange(0, max_i):
+            t = array[i]
+            if t > max:
+                break
+            stack.append(t)
+
+    while l <= max_level - 1:
+        #print stack
+        stack_n = []
+        if l < min_level - 1: # push only
+            for j in xrange(0, len(stack)):
+                a = stack[j]
+                for i in xrange(0, max_i):
+                    if array[i] > a:
+                        break
+                    t = a * array[i]
+                    if t > max:
+                        break
+                    if t < max_1:
+                        stack_n.append(t)
+        elif l == max_level - 1: # yield only
+            for j in xrange(0, len(stack)):
+                a = stack[j]
+                for i in xrange(0, max_i):
+                    if array[i] > a:
+                        break
+                    t = a * array[i]
+                    if t > max:
+                        break
+                    if min < t:
+                        yield t
+        else: # push or yield
+            for j in xrange(0, len(stack)):
+                a = stack[j]
+                for i in xrange(0, max_i):
+                    if array[i] > a:
+                        break
+                    t = a * array[i]
+                    if t > max:
+                        break
+                    if min < t:
+                        yield t
+                    elif t < max_1:
+                        stack_n.append(t)
+
+        l = l + 1
+        del stack[:]
+        stack = stack_n
 
 '''
 a = [7, 11, 13]
@@ -285,6 +489,10 @@ def get_array_product_once(array, min, max):
                 yield t
             if t > max:
                 break
+
+
+
+
 
 
 
