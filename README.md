@@ -1,4 +1,4 @@
-# BuildingPrimeNumbers
+# BuildingPrimeNumbers #
 
 This repository is about a new algorithm of generating prime numbers using Prefect Composite Number Theory founded by Honggang(Grant), Zhao from 2017-11-11
 
@@ -12,3 +12,5 @@ free for non-commercial use. For commercial use, please contact me.
 About me: A developer, architect in Toronto. My email is honggangz@gmail.com . 
 
 Copyright reserved.
+
+
