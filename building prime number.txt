@@ -57,7 +57,11 @@ Prefect Composite Number 30=2x3x5，Prime 7 to 29 is not 30’s factor and less 
 Prefect Composite Number 210=2x3x5x7, 
 List 11，13...31..77（Composite)..209（Composite) has no sharing factor with 210 and less than 210
 211=210+1
+221=210+11=13x17 remove
+223=210+13
+227=210+17
 ...
+
 353=210+11x13 (this is an example of using products of primes in [11,30) instead of a single prime for construction, this kind of examples will grow when number getting larger)
 ...
 2101=210x10+1=191x11 
